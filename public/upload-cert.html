@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Sertifikat</title>
+</head>
+<body>
+    <h1>Upload Sertifikat</h1>
+    <form id="uploadCertForm" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Judul" required>
+        <input type="date" name="issued_date" required>
+        <input type="file" name="certificate" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadCertForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/upload/certificate', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            alert(result);
+        };
+    </script>
+</body>
+</html>

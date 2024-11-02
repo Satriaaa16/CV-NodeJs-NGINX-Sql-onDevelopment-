@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Proyek</title>
+</head>
+<body>
+    <h1>Upload Proyek</h1>
+    <form id="uploadProjectForm">
+        <input type="text" name="name" placeholder="Nama Proyek" required>
+        <textarea name="description" placeholder="Deskripsi" required></textarea>
+        <input type="url" name="link" placeholder="Link Proyek" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadProjectForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/upload/project', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            alert(result);
+        };
+    </script>
+</body>
+</html>
